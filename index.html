@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Home Server Interface</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/index.css" />
+		<link rel="stylesheet" href="css/gauges.css" />
+		<link rel="stylesheet" href="css/js-snackbar.min.css" />
+		
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/img/favicon/site.webmanifest">
+		<link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="/img/favicon/favicon.ico">
+		<meta name="msapplication-TileColor" content="#2b5797">
+		<meta name="msapplication-config" content="/img/favicon/browserconfig.xml">
+		<meta name="theme-color" content="#626262">
+
+
+
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+		<script src="js/js-snackbar.min.js"></script>
+	</head>
+	<body>
+		<!--Title bar, also displays current date/time via JS-->
+		<div class="title-bar">
+			<h1 class="title-header">Home Server Interface</h1>
+			<h1 class="title-time-date" id="time_date"></h1>
+		</div>
+
+		<!--Main content-->
+		<div>
+			<h2>Welcome to the Home Server Interface.</h2>
+			<h3>The interface allows you to easily manage the home server. Please select the utility you wish to access.</h3>
+
+			<!--Buttons for accessing different aspects of the server-->
+			<div class="button-shelf">
+				<div class="button-container">
+					<button onclick="location.href='admin/index.php'" class="app-button">
+						<img src="admin/img/favicon.png" height="96px" width="96px" />
+						<p>Pi-Hole</p>
+					</button>
+				</div>
+				<div class="button-container">
+					<button onclick="location.href='https://rpi3b-homeserver:10000/'" class="app-button">
+						<img src="img/webmin.ico" height="96px" width="96px" />
+						<p>Webmin</p>
+					</button>
+				</div>
+				<div class="button-container">
+					<button onclick="location.href='http://rpi3b-homeserver:6175'" class="app-button">
+						<img src="img/console.png" height="96px" width="96px" />
+						<p>Shell</p>
+					</button>
+				</div>
+				<div class="button-container">
+					<button onclick="location.href='http://rpi3b-homeserver/php/filemanager.php'" class="app-button">
+						<img src="/img/file_manager.png" height="96px" width="96px" />
+						<p>File Manager</p>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!--System status information-->
+
+		<h1 style="text-align: center;">System Status</h1>
+
+		<div class="status-area">
+			<div class="status-container-gauges">
+				<div id="cpu_temp_display" class="gauge-container">
+					<span class="label">TEMPERATURE (F)</span>
+				</div>
+				<div id="cpu_freq_display" class="gauge-container">
+					<span class="label">CPU UTILIZATION</span>
+				</div>
+				<div id="system_memory_display" class="gauge-container">
+					<span class="label">SYSTEM MEMORY</span>
+				</div>
+			</div>
+			<div class="status-container-network">
+				<h2 style="color: white;">NETWORK</h2>
+				<div id="network_transmission_display" class="network_trans">
+					<h3 style="color: white;">TRANSMISSION (TX):     <span id="network_tx" class="network_tx"></span></h3>
+					<h3 style="color: white;">RECEIVE (RX):     <span id="network_rx" class="network_rx"></span></h3>
+				</div>
+			</div>
+			<!--
+			<div class="status-container-histplot">
+				<h2 style="color: white;">HISTORY</h2>
+				<div id="histplot_box" class="histplot-box">
+					
+				</div>
+			</div>
+			-->
+		</div>
+
+		<footer>
+			<div>
+				<p id="footer-content"></p>
+			</div>
+		</footer>
+
+		<!--Page Scripts-->
+
+		<script src="js/theme.js"></script>
+		<script src="js/gauges.min.js"></script>
+		<script src="js/system_information.js"></script>
+		<script src="js/time_date.js"></script>
+		<script src="js/kiosk.js"></script>
+	</body>
+</html>
