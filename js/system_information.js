@@ -1,3 +1,5 @@
+// @ts-check
+
 // Define gauges and such
 // Standalone
 var Gauge = window.Gauge;
@@ -8,7 +10,8 @@ var cpu_temp_gauge = Gauge(document.getElementById("cpu_temp_display"), {
 		max: 200,
 		// custom label renderer
 		label: function(value) {
-			return Number(Math.round(value+'e'+1)+'e-'+1) + "/" + this.max;
+			// @ts-ignore
+			return Number(Math.round(value +'e'+1)+'e-'+1) + "/" + this.max;
 		},
 		value: 1,
 		// Custom dial colors (Optional)
@@ -67,17 +70,21 @@ var system_memory_gauge = Gauge(document.getElementById("system_memory_display")
 	}
 });
 
-
+var msg = {};
 function getSystemMetrics() {
 $.ajax({
 		type: "POST",
-		url: "cgi-bin/compile_metrics.py",
+		url: "/cgi-bin/sysinfo.py",
+		cache: false,
 		dataType: "html",
+		processData: false,
 		success: function(msg)
 		{        
 				// Parse the JSON data into a JS Object
-				// console.log(msg);
-				metrics = JSON.parse(msg);
+				console.log(msg);
+				var metrics = JSON.parse(msg);
+				//var metrics = JSON.parse('{"metrics": [{"cpu_temp": "132.44", "cpu_freq": "30.8", "system_memory": "66.6", "network_rx": "3.009765625", "network_tx": "0.064453125"}]}');
+				console.log(metrics);
 
 				//Print values to HTML page
 				cpu_temp_gauge.setValueAnimated(metrics.metrics[0].cpu_temp, 1);
@@ -113,7 +120,7 @@ $.ajax({
 				});}
 		},
 });
-};
+}
 
 getSystemMetrics();
-window.setInterval(function() {getSystemMetrics()}, 5000);
+window.setInterval(function() {getSystemMetrics();}, 5000);
